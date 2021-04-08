@@ -1088,7 +1088,8 @@ class Logger:
         default=None,
         message="An error has been caught in function '{record[function]}', "
         "process '{record[process].name}' ({record[process].id}), "
-        "thread '{record[thread].name}' ({record[thread].id}):"
+        "thread '{record[thread].name}' ({record[thread].id}):",
+        **kwargs
     ):
         """Return a decorator to automatically log possibly caught error in wrapped function.
 
@@ -1192,7 +1193,7 @@ class Logger:
 
                 catch_options = [(type_, value, traceback_), depth, True] + options
                 level_id, static_level_no = self._dynamic_level(level)
-                self._log(level_id, static_level_no, from_decorator, catch_options, message, (), {})
+                self._log(level_id, static_level_no, from_decorator, catch_options, message, (), kwargs)
 
                 if onerror is not None:
                     onerror(value)
